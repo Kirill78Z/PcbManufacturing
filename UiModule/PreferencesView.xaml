@@ -1,0 +1,227 @@
+﻿<UserControl x:Class="UiModule.PreferencesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UiModule"
+             xmlns:properties="clr-namespace:UiModule.Properties"
+             xmlns:businessLogic="clr-namespace:BusinessLogic;assembly=BusinessLogic"
+             xmlns:converters="clr-namespace:UiModule.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" 
+             d:DataContext="{d:DesignInstance {x:Type businessLogic:PreferencesViewModel}}" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PreferenceName">
+                <Setter Property="Control.Margin" Value="3" />
+                <Setter Property="Control.HorizontalAlignment" Value="Right"/>
+            </Style>
+
+            <Style x:Key="PreferenceInput">
+                <Setter Property="Control.Margin" Value="3" />
+                <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+                <Setter Property="Control.MinWidth" Value="300"/>
+            </Style>
+
+            <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="RadioButton">
+                <Setter Property="Width" Value="75"></Setter>
+            </Style>
+
+            <converters:IntToSolidBrushConverter x:Key="IntToSolidBrushConverter" />
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+
+            <DataTemplate DataType="{x:Type businessLogic:MaterialColor}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Stroke="Black" Fill="{Binding Color, Mode=OneWay, Converter={StaticResource IntToSolidBrushConverter}}" Width="15" Height="15" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </DataTemplate>
+
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid  IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Header"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="0 0 40 0">
+                <Run Text="{x:Static properties:Resources.ProjectBasics}" FontWeight="Bold"/>
+                <LineBreak />
+                <Run Text="{x:Static properties:Resources.PreferencesOnThePageSupersedeDesignFileNotes}" />
+            </TextBlock>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.ProjectName}" Style="{StaticResource PreferenceName}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ProjectName}"  Style="{StaticResource PreferenceInput}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.ZipCode}" Style="{StaticResource PreferenceName}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ZipCode}" Style="{StaticResource PreferenceInput}" MinWidth="150" MaxLength="6"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.BoardsQuantity}" Style="{StaticResource PreferenceName}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding BoardsQuantity}" Style="{StaticResource PreferenceInput}" MinWidth="150"/>
+            </Grid>
+
+        </Grid>
+
+        <Separator Grid.Row="1" />
+
+        <Grid Grid.Row="2" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Header"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="5 5 40 5">
+                <Run Text="{x:Static properties:Resources.ImportantBoardPreferences}" FontWeight="Bold"/>
+                <LineBreak />
+                <Run Text="{x:Static properties:Resources.PreferencesOnThePageSupersedeDesignFileNotes}" />
+            </TextBlock>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.BoardThickness}" Style="{StaticResource PreferenceName}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BoardThickness}" Style="{StaticResource PreferenceInput}" MinWidth="150"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.Material}" Style="{StaticResource PreferenceName}"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="MaterialComboBox" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}"/>
+                <local:PreferenceImpactTextIndicator Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=MaterialComboBox, Path=SelectedItem}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.SurfaceFinish}" Style="{StaticResource PreferenceName}"/>
+                <ComboBox Grid.Row="2" Grid.Column="1"  Name="SurfaceFinishComboBox" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding SurfaceFinishes}" SelectedItem="{Binding SurfaceFinish}"/>
+                <local:PreferenceImpactTextIndicator Grid.Row="2" Grid.Column="2" DataContext="{Binding ElementName=SurfaceFinishComboBox, Path=SelectedItem}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.SolderMaskColor}" Style="{StaticResource PreferenceName}"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding SolderMaskColors}" SelectedItem="{Binding SolderMaskColor}"/>
+            </Grid>
+        </Grid>
+
+        <Separator Grid.Row="3" />
+
+        <Grid Grid.Row="4" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"  SharedSizeGroup="Header"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="5 5 40 5">
+                <Run Text="{x:Static properties:Resources.SpecialBoardPreferences}" FontWeight="Bold"/>
+                <LineBreak />
+                <Run Text="{x:Static properties:Resources.PreferencesOnThePageSupersedeDesignFileNotes}" />
+            </TextBlock>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.LeadFree}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="0" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="LeadFree" Content="{x:Static properties:Resources.Yes}" IsChecked="{Binding LeadFree}" />
+                    <RadioButton GroupName="LeadFree" Content="{x:Static properties:Resources.No}" IsChecked="{Binding LeadFree, Converter={StaticResource InverseBooleanConverter}}" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.IpcClass}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="IpcClass" Content="{x:Static properties:Resources.Class2}" IsChecked="{Binding IpcClass, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Class2}" />
+                    <RadioButton GroupName="IpcClass" Content="{x:Static properties:Resources.Class3}" IsChecked="{Binding IpcClass, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Class3}" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.ITAR}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="2" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="ITAR" Content="{x:Static properties:Resources.Yes}"  IsChecked="{Binding Itar}"/>
+                    <RadioButton GroupName="ITAR" Content="{x:Static properties:Resources.No}" IsChecked="{Binding Itar, Converter={StaticResource InverseBooleanConverter}}"/>
+                </WrapPanel>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="{x:Static properties:Resources.FluxType}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="3" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="FluxType" Content="{x:Static properties:Resources.Clean}" IsChecked="{Binding FluxType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Clean}" />
+                    <RadioButton GroupName="FluxType" Content="{x:Static properties:Resources.NoClean}" IsChecked="{Binding FluxType, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=NoClean}" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="{x:Static properties:Resources.SilkscreenColor}" Style="{StaticResource PreferenceName}"/>
+                <ComboBox Grid.Row="4" Grid.Column="1" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding SilkscreenColors}" SelectedItem="{Binding SilkscreenColor}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="{x:Static properties:Resources.CooperWeightOnInnerLayers}" Style="{StaticResource PreferenceName}"/>
+                <ComboBox Grid.Row="5" Grid.Column="1" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding CooperWeightOnInnerLayers}" SelectedItem="{Binding CooperWeightOnInnerLayer}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="{x:Static properties:Resources.CooperWeightOnOuterLayers}" Style="{StaticResource PreferenceName}"/>
+                <ComboBox Grid.Row="6" Grid.Column="1" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding CooperWeightOnOuterLayers}" SelectedItem="{Binding CooperWeightOnOuterLayer}"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="{x:Static properties:Resources.ControlledImpedance}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="7" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="ControlledImpedance" Content="{x:Static properties:Resources.None}" IsChecked="{Binding ControlledImpedance, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=None}" />
+                    <RadioButton GroupName="ControlledImpedance" Content="{x:Static properties:Resources.SeeNotes}" IsChecked="{Binding ControlledImpedance, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=SeeNotes}" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="{x:Static properties:Resources.TentingForVias}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="8" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="TentingForVias" Content="{x:Static properties:Resources.BothSides}" IsChecked="{Binding TentingForVias, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=BothSides}" />
+                    <RadioButton GroupName="TentingForVias" Content="{x:Static properties:Resources.TopSide}" IsChecked="{Binding TentingForVias, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=TopSide}" />
+                    <RadioButton GroupName="TentingForVias" Content="{x:Static properties:Resources.BottomSide}" IsChecked="{Binding TentingForVias, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=BottomSide}" />
+                    <RadioButton GroupName="TentingForVias" Content="{x:Static properties:Resources.None}" IsChecked="{Binding TentingForVias, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=None}" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="{x:Static properties:Resources.Stackup}" Style="{StaticResource PreferenceName}"/>
+                <WrapPanel Grid.Row="9" Grid.Column="1" Style="{StaticResource PreferenceInput}" Orientation="Horizontal">
+                    <RadioButton GroupName="Stackup" Content="{x:Static properties:Resources.Standard}" IsChecked="{Binding Stackup, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Standard}" />
+                    <RadioButton GroupName="Stackup" Content="{x:Static properties:Resources.SeeNotes}" IsChecked="{Binding Stackup, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=SeeNotes}" />
+                </WrapPanel>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Text="{x:Static properties:Resources.Notes}" Style="{StaticResource PreferenceName}"/>
+                <TextBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource PreferenceInput}" Height="60" HorizontalAlignment="Stretch" Text="{Binding Notes}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

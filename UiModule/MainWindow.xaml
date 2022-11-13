@@ -1,0 +1,27 @@
+﻿<Window x:Class="UiModule.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UiModule"
+        xmlns:properties="clr-namespace:UiModule.Properties"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="900"
+        MinWidth="900">
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+        <StackPanel Orientation="Vertical">
+            <Expander Header="{x:Static properties:Resources.Preferences}" HorizontalContentAlignment="Stretch">
+                <!--Задание Width нужно чтобы WrapPanel-ы в PreferencesView правильно реагировали на ресайз окна - не нашел другого способа-->
+                <!--Width="{Binding ElementName=Window, Path=ActualWidth}"-->
+                <local:PreferencesView/>
+            </Expander>
+            <Expander Header="{x:Static properties:Resources.Quote}">
+                <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>
+            </Expander>
+            <Expander Header="{x:Static properties:Resources.Orders}">
+                <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+    
+</Window>
