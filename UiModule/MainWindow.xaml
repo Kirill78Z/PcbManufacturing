@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:UiModule"
         xmlns:properties="clr-namespace:UiModule.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900"
-        MinWidth="900">
+        Title="MainWindow" Height="450" Width="950"
+        MinWidth="950">
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
         <StackPanel Orientation="Vertical">
             <Expander Header="{x:Static properties:Resources.Preferences}" HorizontalContentAlignment="Stretch">
@@ -16,7 +16,7 @@
                 <local:PreferencesView/>
             </Expander>
             <Expander Header="{x:Static properties:Resources.Quote}">
-                <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>
+                <local:QuoteView/>
             </Expander>
             <Expander Header="{x:Static properties:Resources.Orders}">
                 <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>

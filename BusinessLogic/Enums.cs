@@ -36,4 +36,11 @@ namespace BusinessLogic
         Standard,
         SeeNotes
     }
+
+    public enum QuoteElementType
+    {
+        Fabrication = 0,
+        Assembly = 1,
+        Components = 2
+    }
 }

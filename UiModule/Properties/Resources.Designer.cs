@@ -151,6 +151,15 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cost Impact.
+        /// </summary>
+        public static string CostImpact {
+            get {
+                return ResourceManager.GetString("CostImpact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to d.
         /// </summary>
         public static string DaysShort {
@@ -259,6 +268,15 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter.
+        /// </summary>
+        public static string Parameter {
+            get {
+                return ResourceManager.GetString("Parameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preferences.
         /// </summary>
         public static string Preferences {
@@ -300,6 +318,15 @@ namespace UiModule.Properties {
         public static string Quote {
             get {
                 return ResourceManager.GetString("Quote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running Total.
+        /// </summary>
+        public static string RunningTotal {
+            get {
+                return ResourceManager.GetString("RunningTotal", resourceCulture);
             }
         }
         
@@ -376,11 +403,29 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Impact.
+        /// </summary>
+        public static string TimeImpact {
+            get {
+                return ResourceManager.GetString("TimeImpact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Top Side.
         /// </summary>
         public static string TopSide {
             get {
                 return ResourceManager.GetString("TopSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
             }
         }
         

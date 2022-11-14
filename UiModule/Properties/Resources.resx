@@ -147,6 +147,9 @@
   <data name="CooperWeightOnOuterLayers" xml:space="preserve">
     <value>Cooper Weight on Outer Layers</value>
   </data>
+  <data name="CostImpact" xml:space="preserve">
+    <value>Cost Impact</value>
+  </data>
   <data name="DaysShort" xml:space="preserve">
     <value>d</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="Orders" xml:space="preserve">
     <value>Orders</value>
   </data>
+  <data name="Parameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
   <data name="Preferences" xml:space="preserve">
     <value>Preferences</value>
   </data>
@@ -197,6 +203,9 @@
   </data>
   <data name="Quote" xml:space="preserve">
     <value>Quote</value>
+  </data>
+  <data name="RunningTotal" xml:space="preserve">
+    <value>Running Total</value>
   </data>
   <data name="SeeNotes" xml:space="preserve">
     <value>See Notes</value>
@@ -222,8 +231,14 @@
   <data name="TentingForVias" xml:space="preserve">
     <value>Tenting for Vias</value>
   </data>
+  <data name="TimeImpact" xml:space="preserve">
+    <value>Time Impact</value>
+  </data>
   <data name="TopSide" xml:space="preserve">
     <value>Top Side</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

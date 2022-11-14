@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using UiModule.Properties;
 
 namespace UiModule.Converters
 {
@@ -14,7 +15,12 @@ namespace UiModule.Converters
             if (value == null || !(value is double timeImpact))
                 return DependencyProperty.UnsetValue;
 
-            return timeImpact.ToString("+#;-#;#");
+            return TimeImpactToString(timeImpact);
+        }
+
+        public static string TimeImpactToString(double impactSum)
+        {
+            return impactSum.ToString($"# {Resources.DaysShort};# {Resources.DaysShort};-");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
