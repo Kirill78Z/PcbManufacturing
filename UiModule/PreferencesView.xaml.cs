@@ -22,7 +22,6 @@ namespace UiModule
         public PreferencesView()
         {
             InitializeComponent();
-            DataContext = new PreferencesViewModel();
         }
     }
 }

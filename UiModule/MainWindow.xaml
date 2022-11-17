@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UiModule"
         xmlns:properties="clr-namespace:UiModule.Properties"
+        xmlns:businessLogic="clr-namespace:BusinessLogic;assembly=BusinessLogic"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="950"
-        MinWidth="950">
-    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+        MinWidth="950"
+        d:DataContext="{d:DesignInstance {x:Type businessLogic:MainViewModel}}">
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
-            <Expander Header="{x:Static properties:Resources.Preferences}" HorizontalContentAlignment="Stretch">
-                <!--Задание Width нужно чтобы WrapPanel-ы в PreferencesView правильно реагировали на ресайз окна - не нашел другого способа-->
-                <!--Width="{Binding ElementName=Window, Path=ActualWidth}"-->
-                <local:PreferencesView/>
+            <Expander Name="PreferencesExpander" Header="{x:Static properties:Resources.Preferences}" IsExpanded="True">
+                <local:PreferencesView DataContext="{Binding PreferencesViewModel}"/>
             </Expander>
-            <Expander Header="{x:Static properties:Resources.Quote}">
-                <local:QuoteView/>
+            <Expander Name="QuoteExpander" Header="{x:Static properties:Resources.Quote}" IsEnabled="{Binding PreferencesViewModel.IsConfirmed}">
+                <local:QuoteView DataContext="{Binding QuoteViewModel}"/>
             </Expander>
             <Expander Header="{x:Static properties:Resources.Orders}">
                 <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>

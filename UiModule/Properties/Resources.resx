@@ -153,6 +153,9 @@
   <data name="DaysShort" xml:space="preserve">
     <value>d</value>
   </data>
+  <data name="DiscardToDefault" xml:space="preserve">
+    <value>Discard to default</value>
+  </data>
   <data name="FluxType" xml:space="preserve">
     <value>Flux Type</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="RunningTotal" xml:space="preserve">
     <value>Running Total</value>
+  </data>
+  <data name="SaveAndContinue" xml:space="preserve">
+    <value>Save and continue</value>
   </data>
   <data name="SeeNotes" xml:space="preserve">
     <value>See Notes</value>

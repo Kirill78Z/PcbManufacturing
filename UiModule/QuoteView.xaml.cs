@@ -22,7 +22,6 @@ namespace UiModule
         public QuoteView()
         {
             InitializeComponent();
-            DataContext = new QuoteViewModel();
         }
     }
 }

@@ -5,7 +5,15 @@ using System.Linq;
 
 namespace BusinessLogic
 {
-    public class PreferencesViewModel : ViewModelBase
+    public interface IPreferencesViewModel
+    {
+        uint BoardsQuantity { get; }
+        float BoardThickness { get; }
+        MaterialPreference Material { get; }
+        MaterialPreference SurfaceFinish { get; }
+        bool IsConfirmed { get; }
+    }
+    public class PreferencesViewModel : ViewModelBase, IPreferencesViewModel
     {
         private static readonly MaterialColor[] StandardSolderMaskColors =
         {
@@ -34,25 +42,27 @@ namespace BusinessLogic
             new MaterialColor("OtherSilkscreenColor", 0x6990c7),
             new MaterialColor("OtherSilkscreenColor2", 0xb285cc),
         };
-
+        private readonly IQuoteViewModel _quote;
         private string _projectName = "BC0001";
-        private UInt32 _zipcode = 92122;
+        private uint _zipcode = 92122;
         private uint _boardsQuantity = 20;
         private float _boardThickness = 1.57f;
         private MaterialColor _solderMaskColor = StandardSolderMaskColors[0];
         private MaterialPreference _material = StandardMaterials[0];
         private MaterialPreference _surfaceFinish = StandardSurfaceFinishes[0];
         private bool _leadFree = true;
-        private bool _itar;
-        private TentingForVias _tentingForVias;
-        private ControlledImpedance _controlledImpedance;
-        private FluxType _fluxType;
+        private bool _itar = false;
+        private TentingForVias _tentingForVias = TentingForVias.None;
+        private ControlledImpedance _controlledImpedance = ControlledImpedance.None;
+        private FluxType _fluxType = FluxType.NoClean;
         private IpcClass _ipcClass = IpcClass.Class2;
-        private Stackup _stackup;
+        private Stackup _stackup = Stackup.Standard;
         private MaterialColor _silkscreenColor = StandardSilkscreenColors[0];
         private string _cooperWeightOnInnerLayer = "1.0oz";
         private string _cooperWeightOnOuterLayer = "1.0oz";
-        private string _notes;
+        private string _notes = String.Empty;
+
+        private bool _isConfirmed = false;
 
         public string ProjectName
         {
@@ -61,26 +71,29 @@ namespace BusinessLogic
             {
                 _projectName = value;
                 OnPropertyChanged(nameof(ProjectName));
+                OnAnyPropertyChanged();
             }
         }
 
-        public UInt32 ZipCode
+        public uint ZipCode
         {
             get => _zipcode;
             set
             {
                 _zipcode = value;
                 OnPropertyChanged(nameof(ZipCode));
+                OnAnyPropertyChanged();
             }
         }
 
-        public UInt32 BoardsQuantity
+        public uint BoardsQuantity
         {
             get => _boardsQuantity;
             set
             {
                 _boardsQuantity = value;
                 OnPropertyChanged(nameof(BoardsQuantity));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -91,6 +104,7 @@ namespace BusinessLogic
             {
                 _boardThickness = Math.Abs(value);
                 OnPropertyChanged(nameof(BoardThickness));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -104,6 +118,7 @@ namespace BusinessLogic
             {
                 _material = value;
                 OnPropertyChanged(nameof(Material));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -117,6 +132,7 @@ namespace BusinessLogic
             {
                 _surfaceFinish = value;
                 OnPropertyChanged(nameof(SurfaceFinish));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -131,6 +147,7 @@ namespace BusinessLogic
             {
                 _solderMaskColor = value;
                 OnPropertyChanged(nameof(SolderMaskColor));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -141,6 +158,7 @@ namespace BusinessLogic
             {
                 _leadFree = value;
                 OnPropertyChanged(nameof(LeadFree));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -151,6 +169,7 @@ namespace BusinessLogic
             {
                 _itar = value;
                 OnPropertyChanged(nameof(Itar));
+                OnAnyPropertyChanged();
             }
         }
 
@@ -161,6 +180,7 @@ namespace BusinessLogic
             {
                 _ipcClass = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -171,6 +191,7 @@ namespace BusinessLogic
             {
                 _fluxType = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -181,6 +202,7 @@ namespace BusinessLogic
             {
                 _controlledImpedance = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -191,6 +213,7 @@ namespace BusinessLogic
             {
                 _tentingForVias = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -201,6 +224,7 @@ namespace BusinessLogic
             {
                 _stackup = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -214,6 +238,7 @@ namespace BusinessLogic
             {
                 _silkscreenColor = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -232,6 +257,7 @@ namespace BusinessLogic
             {
                 _cooperWeightOnInnerLayer = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -249,6 +275,7 @@ namespace BusinessLogic
             {
                 _cooperWeightOnOuterLayer = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
         }
 
@@ -259,7 +286,62 @@ namespace BusinessLogic
             {
                 _notes = value;
                 OnPropertyChanged();
+                OnAnyPropertyChanged();
             }
+        }
+
+        public ActionCommand DiscardToDefaultCommand { get; }
+        public ActionCommand SaveAndContinueCommand { get; }
+
+        private void OnAnyPropertyChanged()
+        {
+            IsConfirmed = false;
+        }
+        public bool IsConfirmed
+        {
+            get => _isConfirmed;
+            set
+            {
+                _isConfirmed = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public PreferencesViewModel(IQuoteViewModel quote)
+        {
+            DiscardToDefaultCommand = new ActionCommand(OnDiscardToDefault);
+            SaveAndContinueCommand = new ActionCommand(OnSaveAndContinue);
+            _quote = quote;
+        }
+
+        private void OnDiscardToDefault(object arg)
+        {
+            ProjectName = "BC0001";
+            ZipCode = 92122;
+            BoardsQuantity = 20;
+            BoardThickness = 1.57f;
+            SolderMaskColor = StandardSolderMaskColors[0];
+            Material = StandardMaterials[0];
+            SurfaceFinish = StandardSurfaceFinishes[0];
+            LeadFree = true;
+            Itar = false;
+            TentingForVias = TentingForVias.None;
+            ControlledImpedance = ControlledImpedance.None;
+            FluxType = FluxType.NoClean;
+            IpcClass = IpcClass.Class2;
+            Stackup = Stackup.Standard;
+            SilkscreenColor = StandardSilkscreenColors[0];
+            CooperWeightOnInnerLayer = "1.0oz";
+            CooperWeightOnOuterLayer = "1.0oz";
+            Notes = String.Empty;
+
+            IsConfirmed = false;
+        }
+
+        private void OnSaveAndContinue(object arg)
+        {
+            IsConfirmed = true;
+            _quote.UpdateQuote(this);
         }
     }
 

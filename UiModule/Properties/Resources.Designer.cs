@@ -169,6 +169,15 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discard to default.
+        /// </summary>
+        public static string DiscardToDefault {
+            get {
+                return ResourceManager.GetString("DiscardToDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flux Type.
         /// </summary>
         public static string FluxType {
@@ -327,6 +336,15 @@ namespace UiModule.Properties {
         public static string RunningTotal {
             get {
                 return ResourceManager.GetString("RunningTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and continue.
+        /// </summary>
+        public static string SaveAndContinue {
+            get {
+                return ResourceManager.GetString("SaveAndContinue", resourceCulture);
             }
         }
         

@@ -48,6 +48,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Margin="5">
@@ -222,6 +223,17 @@
                 <TextBlock Grid.Row="10" Grid.Column="0" Text="{x:Static properties:Resources.Notes}" Style="{StaticResource PreferenceName}"/>
                 <TextBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource PreferenceInput}" Height="60" HorizontalAlignment="Stretch" Text="{Binding Notes}"/>
             </Grid>
+        </Grid>
+
+        <Grid Grid.Row="5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="{x:Static properties:Resources.DiscardToDefault}" Margin="3" Command="{Binding DiscardToDefaultCommand}"/>
+            <Button Grid.Column="2" Content="{x:Static properties:Resources.SaveAndContinue}"  Margin="3" Command="{Binding SaveAndContinueCommand}"/>
         </Grid>
     </Grid>
 </UserControl>
