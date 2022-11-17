@@ -61,6 +61,15 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assembly.
+        /// </summary>
+        public static string Assembly {
+            get {
+                return ResourceManager.GetString("Assembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Boards Quantity.
         /// </summary>
         public static string BoardsQuantity {
@@ -124,6 +133,15 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Components.
+        /// </summary>
+        public static string Components {
+            get {
+                return ResourceManager.GetString("Components", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Controlled Impedance.
         /// </summary>
         public static string ControlledImpedance {
@@ -174,6 +192,15 @@ namespace UiModule.Properties {
         public static string DiscardToDefault {
             get {
                 return ResourceManager.GetString("DiscardToDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fabrication.
+        /// </summary>
+        public static string Fabrication {
+            get {
+                return ResourceManager.GetString("Fabrication", resourceCulture);
             }
         }
         

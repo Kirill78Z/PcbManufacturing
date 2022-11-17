@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BusinessLogic;
 
 namespace CustomControls
 {
@@ -44,11 +45,29 @@ namespace CustomControls
     ///     <MyNamespace:CustomControl1/>
     ///
     /// </summary>
-    public class CustomControl1 : Control
+    public class ManufacturingDiagram : Control
     {
-        static CustomControl1()
+        static ManufacturingDiagram()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CustomControl1), new FrameworkPropertyMetadata(typeof(CustomControl1)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ManufacturingDiagram), new FrameworkPropertyMetadata(typeof(ManufacturingDiagram)));
+        }
+
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register(nameof(Value),
+                typeof(double), typeof(IQuoteViewModel),
+                new PropertyMetadata(0.0, OnValueChanged));
+
+
+        private static void OnValueChanged(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
+        {
+            //TODO update diagram
+            
+        }
+        public double Value
+        {
+            get { return (double)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
     }
 }

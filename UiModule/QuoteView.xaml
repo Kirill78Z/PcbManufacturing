@@ -22,10 +22,11 @@
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
 
-            <converters:GroupImpactSummaryConverter x:Key="GroupImpactSummaryConverter" />
+            <converters:GroupImpactSummaryConverter2 x:Key="GroupImpactSummaryConverter2" />
             <converters:GroupExpanderToggleBtnRotationConverter x:Key="GroupExpanderToggleBtnRotationConverter" />
             <converters:TimeImpactConverter x:Key="TimeImpactConverter"/>
             <converters:CostImpactConverter x:Key="CostImpactConverter"/>
+            <converters:GroupNameConverter x:Key="GroupNameConverter"/>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -98,22 +99,22 @@
                                                                   HorizontalAlignment="Center"
                                                                   VerticalAlignment="Center"
                                                                   Points="8,0 8,8 0,8"
-                                                                  Fill="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}">
+                                                                  Fill="{TemplateBinding Foreground}">
                                                                 <Polygon.RenderTransform>
-                                                                    <RotateTransform CenterX="4" CenterY="4" Angle="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GroupExpanderToggleBtnRotationConverter}}"/>
+                                                                    <RotateTransform CenterX="4" CenterY="4" Angle="{TemplateBinding IsChecked, Converter={StaticResource GroupExpanderToggleBtnRotationConverter}}"/>
                                                                 </Polygon.RenderTransform>
                                                             </Polygon>
                                                         </ControlTemplate>
                                                     </ToggleButton.Template>
                                                 </ToggleButton>
-                                                <TextBlock Margin="5,0,0,0" Text="{Binding Name}"  FontWeight="Bold"></TextBlock>
+                                                <TextBlock Margin="5,0,0,0" Text="{Binding Name, Converter={StaticResource GroupNameConverter}}" FontWeight="Bold"></TextBlock>
                                             </StackPanel>
 
                                             <TextBlock Grid.Row="0" Grid.Column="2" Margin="3,0,0,0" 
-                                                       Text="{Binding Converter={StaticResource GroupImpactSummaryConverter}}" FontWeight="Bold"/>
+                                                        FontWeight="Bold" Text="{Binding Converter={StaticResource GroupImpactSummaryConverter2}}"/>
                                             <TextBlock Grid.Row="0" Grid.Column="3" Margin="3,0,0,0"  FontWeight="Bold">
                                                 <TextBlock.Text>
-                                                    <Binding Converter="{StaticResource GroupImpactSummaryConverter}">
+                                                    <Binding Converter="{StaticResource GroupImpactSummaryConverter2}">
                                                         <Binding.ConverterParameter>
                                                             <system:Boolean>true</system:Boolean>
                                                         </Binding.ConverterParameter>
