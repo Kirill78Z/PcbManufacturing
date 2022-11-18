@@ -19,6 +19,7 @@ namespace UiModule.Converters
             var isCostImpact = parameter != null && parameter is bool boolParam && boolParam;
             var type = (QuoteElementType)collectionViewGroup.Name;
             //don't use collectionViewGroup to calculate summary values to avoid duplicate calculations
+            //use already calculated summary from QuoteViewModel instead
             var impactSum = MainViewModel.Instance.QuoteViewModel.GetSummary(type, isCostImpact);
             
             return isCostImpact ? CostImpactConverter.CostImpactToString(impactSum) : TimeImpactConverter.TimeImpactToString(impactSum);

@@ -7,6 +7,9 @@ namespace BusinessLogic
 {
     public interface IQuoteViewModel
     {
+        double TimeImpactSummary { get; }
+        double CostImpactSummary { get; }
+
         double FabricationTimeImpactSummary { get; }
         double AssemblyTimeImpactSummary { get; }
         double ComponentsTimeImpactSummary { get; }
@@ -29,6 +32,8 @@ namespace BusinessLogic
         private double _fabricationCostImpactSummary;
         private double _assemblyCostImpactSummary;
         private double _componentsCostImpactSummary;
+
+        private ImpactProportions _impactProportions;
 
         public ObservableCollection<QuoteElement> QuoteElements { get; } = new ObservableCollection<QuoteElement>();
 
@@ -73,6 +78,11 @@ namespace BusinessLogic
         public double ComponentsCostImpactSummary
         {
             get => _componentsCostImpactSummary;
+        }
+
+        public ImpactProportions ImpactProportions
+        {
+            get => _impactProportions;
         }
 
         public double GetSummary(QuoteElementType type, bool isCost)
@@ -127,6 +137,16 @@ namespace BusinessLogic
             }
             OnPropertyChanged(nameof(TimeImpactSummary));
             OnPropertyChanged(nameof(CostImpactSummary));
+
+            OnPropertyChanged(nameof(FabricationTimeImpactSummary));
+            OnPropertyChanged(nameof(AssemblyTimeImpactSummary));
+            OnPropertyChanged(nameof(ComponentsTimeImpactSummary));
+            OnPropertyChanged(nameof(FabricationCostImpactSummary));
+            OnPropertyChanged(nameof(AssemblyCostImpactSummary));
+            OnPropertyChanged(nameof(ComponentsCostImpactSummary));
+
+            _impactProportions = new ImpactProportions(this);
+            OnPropertyChanged(nameof(ImpactProportions));
         }
 
         public void UpdateQuote(IPreferencesViewModel preferences)
@@ -181,6 +201,47 @@ namespace BusinessLogic
         }
     }
 
+    public class ImpactProportions
+    {
+        public double FabricationTimeImpactProportion { get; }
+        public double AssemblyTimeImpactProportion { get; }
+        public double ComponentsTimeImpactProportion { get; }
+        public double FabricationCostImpactProportion { get; }
+        public double AssemblyCostImpactProportion { get; }
+        public double ComponentsCostImpactProportion { get; }
 
+
+        public double TimeImpactAbsolute { get; }
+        public double CostImpactAbsolute { get; }
+
+        public double FabricationTimeImpactAbsolute { get; }
+        public double AssemblyTimeImpactAbsolute { get; }
+        public double ComponentsTimeImpactAbsolute { get; }
+
+        public double FabricationCostImpactAbsolute { get; }
+        public double AssemblyCostImpactAbsolute { get; }
+        public double ComponentsCostImpactAbsolute { get; }
+
+        public ImpactProportions(IQuoteViewModel quote)
+        {
+            FabricationTimeImpactProportion = quote.FabricationTimeImpactSummary / quote.TimeImpactSummary;
+            AssemblyTimeImpactProportion = quote.AssemblyTimeImpactSummary / quote.TimeImpactSummary;
+            ComponentsTimeImpactProportion = quote.ComponentsTimeImpactSummary / quote.TimeImpactSummary;
+
+            FabricationCostImpactProportion = quote.FabricationCostImpactSummary / quote.CostImpactSummary;
+            AssemblyCostImpactProportion = quote.AssemblyCostImpactSummary / quote.CostImpactSummary;
+            ComponentsCostImpactProportion = quote.ComponentsCostImpactSummary / quote.CostImpactSummary;
+
+            TimeImpactAbsolute = quote.TimeImpactSummary;
+            CostImpactAbsolute = quote.CostImpactSummary;
+
+            FabricationTimeImpactAbsolute = quote.FabricationTimeImpactSummary;
+            AssemblyTimeImpactAbsolute = quote.AssemblyTimeImpactSummary;
+            ComponentsTimeImpactAbsolute = quote.ComponentsTimeImpactSummary;
+            FabricationCostImpactAbsolute = quote.FabricationCostImpactSummary;
+            AssemblyCostImpactAbsolute = quote.AssemblyCostImpactSummary;
+            ComponentsCostImpactAbsolute = quote.ComponentsCostImpactSummary;
+        }
+    }
 
 }

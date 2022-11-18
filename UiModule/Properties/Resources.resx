@@ -180,6 +180,9 @@
   <data name="LeadFree" xml:space="preserve">
     <value>Lead Free</value>
   </data>
+  <data name="Manufacturing" xml:space="preserve">
+    <value>Manufacturing</value>
+  </data>
   <data name="Material" xml:space="preserve">
     <value>Material</value>
   </data>

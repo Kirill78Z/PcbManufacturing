@@ -10,6 +10,13 @@
         Title="MainWindow" Height="450" Width="950"
         MinWidth="950"
         d:DataContext="{d:DesignInstance {x:Type businessLogic:MainViewModel}}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="RadioButton">
+                <Setter Property="Width" Value="75"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <Expander Name="PreferencesExpander" Header="{x:Static properties:Resources.Preferences}" IsExpanded="True">

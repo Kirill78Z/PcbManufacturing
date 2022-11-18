@@ -9,6 +9,7 @@
              xmlns:businessLogic="clr-namespace:BusinessLogic;assembly=BusinessLogic"
              xmlns:converters="clr-namespace:UiModule.Converters"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:customControls="clr-namespace:CustomControls;assembly=CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance {x:Type businessLogic:QuoteViewModel}}">
     <UserControl.Resources>
@@ -35,122 +36,147 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
 
-        <DataGrid Name="QuoteDataGrid" IsReadOnly="True" CanUserAddRows="False" 
-                  ItemsSource="{Binding Source={StaticResource GroupedQuoteElements}}"
-                  AutoGenerateColumns="False" HorizontalAlignment="Stretch" 
-                  CanUserResizeColumns="True" 
-                  CanUserResizeRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserSortColumns="False"
-                  CanUserReorderColumns="False"
-                  HeadersVisibility="Column"
-                  Height="250"
-                  HorizontalScrollBarVisibility="Disabled">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="ParameterColumn" 
+        <StackPanel Orientation="Vertical">
+            <DataGrid Name="QuoteDataGrid" IsReadOnly="True" CanUserAddRows="False" 
+                      ItemsSource="{Binding Source={StaticResource GroupedQuoteElements}}"
+                      AutoGenerateColumns="False" HorizontalAlignment="Stretch" 
+                      CanUserResizeColumns="True" 
+                      CanUserResizeRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserSortColumns="False"
+                      CanUserReorderColumns="False"
+                      HeadersVisibility="Column"
+                      Height="250"
+                      HorizontalScrollBarVisibility="Disabled">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="ParameterColumn" 
                                     Header="{x:Static properties:Resources.Parameter}"
                                     Binding="{Binding Parameter}" 
                                     Width="Auto"
                                     MaxWidth="150"/>
-                <DataGridTextColumn x:Name="ValueColumn" 
+                    <DataGridTextColumn x:Name="ValueColumn" 
                                     Header="{x:Static properties:Resources.Value}"
                                     Binding="{Binding Value}" 
                                     Width="Auto"
                                     MaxWidth="200"/>
-                <DataGridTextColumn x:Name="TimeImpactColumn"
+                    <DataGridTextColumn x:Name="TimeImpactColumn"
                                     Header="{x:Static properties:Resources.TimeImpact}"
                                     Binding="{Binding TimeImpact, Converter={StaticResource TimeImpactConverter}}" 
                                     Width="Auto"/>
-                <DataGridTextColumn x:Name="CostImpactColumn" 
+                    <DataGridTextColumn x:Name="CostImpactColumn" 
                                     Header="{x:Static properties:Resources.CostImpact}"
                                     Binding="{Binding CostImpact, Converter={StaticResource CostImpactConverter}}" 
                                     Width="Auto"/>
-            </DataGrid.Columns>
+                </DataGrid.Columns>
 
-            <DataGrid.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="{Binding ActualWidth, ElementName=ParameterColumn}"/>
-                                                <ColumnDefinition Width="{Binding ActualWidth, ElementName=ValueColumn}"/>
-                                                <ColumnDefinition Width="{Binding ActualWidth, ElementName=TimeImpactColumn}"/>
-                                                <ColumnDefinition Width="{Binding ActualWidth, ElementName=CostImpactColumn}"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Orientation="Horizontal">
-                                                <ToggleButton Name="ExpanderToggle" IsChecked="True" Margin="3,0,0,0">
-                                                    <ToggleButton.Template>
-                                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                            <Polygon 
+                <DataGrid.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=ParameterColumn}"/>
+                                                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=ValueColumn}"/>
+                                                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=TimeImpactColumn}"/>
+                                                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=CostImpactColumn}"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ToggleButton Name="ExpanderToggle" IsChecked="True" Margin="3,0,0,0">
+                                                        <ToggleButton.Template>
+                                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                                <Polygon 
                                                                   StrokeThickness="2"
                                                                   HorizontalAlignment="Center"
                                                                   VerticalAlignment="Center"
                                                                   Points="8,0 8,8 0,8"
                                                                   Fill="{TemplateBinding Foreground}">
-                                                                <Polygon.RenderTransform>
-                                                                    <RotateTransform CenterX="4" CenterY="4" Angle="{TemplateBinding IsChecked, Converter={StaticResource GroupExpanderToggleBtnRotationConverter}}"/>
-                                                                </Polygon.RenderTransform>
-                                                            </Polygon>
-                                                        </ControlTemplate>
-                                                    </ToggleButton.Template>
-                                                </ToggleButton>
-                                                <TextBlock Margin="5,0,0,0" Text="{Binding Name, Converter={StaticResource GroupNameConverter}}" FontWeight="Bold"></TextBlock>
-                                            </StackPanel>
+                                                                    <Polygon.RenderTransform>
+                                                                        <RotateTransform CenterX="4" CenterY="4" Angle="{TemplateBinding IsChecked, Converter={StaticResource GroupExpanderToggleBtnRotationConverter}}"/>
+                                                                    </Polygon.RenderTransform>
+                                                                </Polygon>
+                                                            </ControlTemplate>
+                                                        </ToggleButton.Template>
+                                                    </ToggleButton>
+                                                    <TextBlock Margin="5,0,0,0" Text="{Binding Name, Converter={StaticResource GroupNameConverter}}" FontWeight="Bold"></TextBlock>
+                                                </StackPanel>
 
-                                            <TextBlock Grid.Row="0" Grid.Column="2" Margin="3,0,0,0" 
+                                                <TextBlock Grid.Row="0" Grid.Column="2" Margin="3,0,0,0" 
                                                         FontWeight="Bold" Text="{Binding Converter={StaticResource GroupImpactSummaryConverter2}}"/>
-                                            <TextBlock Grid.Row="0" Grid.Column="3" Margin="3,0,0,0"  FontWeight="Bold">
-                                                <TextBlock.Text>
-                                                    <Binding Converter="{StaticResource GroupImpactSummaryConverter2}">
-                                                        <Binding.ConverterParameter>
-                                                            <system:Boolean>true</system:Boolean>
-                                                        </Binding.ConverterParameter>
-                                                    </Binding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                            <ItemsPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding IsChecked, ElementName=ExpanderToggle, Converter={StaticResource BooleanToVisibilityConverter} }"/>
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </DataGrid.GroupStyle>
+                                                <TextBlock Grid.Row="0" Grid.Column="3" Margin="3,0,0,0"  FontWeight="Bold">
+                                                    <TextBlock.Text>
+                                                        <Binding Converter="{StaticResource GroupImpactSummaryConverter2}">
+                                                            <Binding.ConverterParameter>
+                                                                <system:Boolean>true</system:Boolean>
+                                                            </Binding.ConverterParameter>
+                                                        </Binding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                                <ItemsPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Visibility="{Binding IsChecked, ElementName=ExpanderToggle, Converter={StaticResource BooleanToVisibilityConverter} }"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </DataGrid.GroupStyle>
 
-        </DataGrid>
+            </DataGrid>
 
-        <Grid Row="1" Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding ActualWidth, ElementName=ParameterColumn}"/>
-                <ColumnDefinition Width="{Binding ActualWidth, ElementName=ValueColumn}"/>
-                <ColumnDefinition Width="{Binding ActualWidth, ElementName=TimeImpactColumn}"/>
-                <ColumnDefinition Width="{Binding ActualWidth, ElementName=CostImpactColumn}"/>
-            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=ParameterColumn}"/>
+                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=ValueColumn}"/>
+                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=TimeImpactColumn}"/>
+                    <ColumnDefinition Width="{Binding ActualWidth, ElementName=CostImpactColumn}"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Margin="3,0,0,0" 
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Margin="3,0,0,0" 
                        Text="{x:Static properties:Resources.RunningTotal}" 
                        FontWeight="Bold"/>
 
-            <TextBlock Grid.Row="0" Grid.Column="2" Margin="3,0,0,0" 
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="3,0,0,0" 
                        Text="{Binding TimeImpactSummary, Converter={StaticResource TimeImpactConverter}}" 
                        FontWeight="Bold"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" Margin="3,0,0,0"
+                <TextBlock Grid.Row="0" Grid.Column="3" Margin="3,0,0,0"
                        Text="{Binding CostImpactSummary, Converter={StaticResource CostImpactConverter}}" 
                        FontWeight="Bold"/>
-        </Grid>
+            </Grid>
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{x:Static properties:Resources.Manufacturing}" FontWeight="Bold" FontSize="18"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="2">
+                    <RadioButton GroupName="ManufacturingDiagramMode" IsChecked="True" Width="30">
+                        <Image Source="Images/icons8-clock-24.png" SnapsToDevicePixels="True" Height="24" Width="24"/>
+                    </RadioButton>
+                    <RadioButton Name="IsShowCostToggle" GroupName="ManufacturingDiagramMode" IsChecked="False" Width="30">
+                        <Image Source="Images/icons8-us-dollar-24.png" SnapsToDevicePixels="True"  Height="24" Width="24"/>
+                    </RadioButton>
+                </StackPanel>
+            </Grid>
+            <customControls:ManufacturingDiagram ImpactProportions="{Binding ImpactProportions}" IsShowCost="{Binding IsChecked, ElementName=IsShowCostToggle}"/>
+            <Separator/>
+
+
+        </StackPanel>
+
+
+
+
     </Grid>
 </UserControl>

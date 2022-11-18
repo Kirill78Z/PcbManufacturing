@@ -250,6 +250,15 @@ namespace UiModule.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manufacturing.
+        /// </summary>
+        public static string Manufacturing {
+            get {
+                return ResourceManager.GetString("Manufacturing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Material.
         /// </summary>
         public static string Material {

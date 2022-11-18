@@ -23,9 +23,6 @@
                 <Setter Property="Control.MinWidth" Value="300"/>
             </Style>
 
-            <Style BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="RadioButton">
-                <Setter Property="Width" Value="75"></Setter>
-            </Style>
 
             <converters:IntToSolidBrushConverter x:Key="IntToSolidBrushConverter" />
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
@@ -37,8 +34,6 @@
                     <TextBlock Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </DataTemplate>
-
-
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid  IsSharedSizeScope="True">
