@@ -4,23 +4,17 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using UiModule.Properties;
 
-namespace UiModule.Converters
+namespace Common.Converters
 {
-    public class TimeImpactChangeConverter : IValueConverter
+    public class PortionToPercentageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || !(value is double timeImpact))
+            if (value == null || !(value is double portion))
                 return DependencyProperty.UnsetValue;
 
-            return TmeImpactToString(timeImpact);
-        }
-
-        public static string TmeImpactToString(double timeImpact)
-        {
-            return timeImpact.ToString($"+# {Resources.DaysShort};-# {Resources.DaysShort};#");
+            return portion.ToString("0%");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
-namespace BusinessLogic
+namespace Common
 {
     public class ActionCommand : ICommand
     {
@@ -30,5 +28,4 @@ namespace BusinessLogic
             action(parameter);
         }
     }
-
 }

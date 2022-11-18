@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
-namespace UiModule.Converters
+namespace Common.Converters
 {
     [ValueConversion(typeof(Enum), typeof(bool))]
     public class EnumToBoolConverter : IValueConverter

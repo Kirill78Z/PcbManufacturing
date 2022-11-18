@@ -5,22 +5,21 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
-namespace UiModule.Converters
+namespace Common.Converters
 {
-    [ValueConversion(typeof(bool?), typeof(bool))]
-    class InverseBooleanConverter : IValueConverter
+    public class CostImpactChangeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (targetType != typeof(bool?))
+            if (value == null || !(value is double costImpact))
                 return DependencyProperty.UnsetValue;
-            bool? b = (bool?)value;
-            return b.HasValue && !b.Value;
+
+            return costImpact.ToString("+$#;-$#;#");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return !(value as bool?);
+            throw new NotImplementedException();
         }
     }
 }

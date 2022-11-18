@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation.Provider;
 using System.Windows.Data;
-using UiModule.Properties;
 
-namespace UiModule.Converters
+namespace Common.Converters
 {
-    public class TimeImpactConverter : IValueConverter
+    public class CostImpactConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || !(value is double timeImpact))
+            if (value == null || !(value is double costImpact))
                 return DependencyProperty.UnsetValue;
 
-            return TimeImpactToString(timeImpact);
+            return CostImpactToString(costImpact);
         }
 
-        public static string TimeImpactToString(double impactSum)
+        public static string CostImpactToString(double impactSum)
         {
-            return impactSum.ToString($"# {Resources.DaysShort};# {Resources.DaysShort};-");
+            return impactSum.ToString("$0.00");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

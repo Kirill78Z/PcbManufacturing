@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using BusinessLogic;
+using Common.Converters;
 
 namespace UiModule.Converters
 {

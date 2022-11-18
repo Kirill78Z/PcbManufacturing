@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UiModule"
-             xmlns:properties="clr-namespace:UiModule.Properties"
+             xmlns:properties="clr-namespace:Common.Properties;assembly=Common"
              xmlns:businessLogic="clr-namespace:BusinessLogic;assembly=BusinessLogic"
              xmlns:converters="clr-namespace:UiModule.Converters"
+             xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" 
              d:DataContext="{d:DesignInstance {x:Type businessLogic:PreferencesViewModel}}" >
@@ -24,9 +25,9 @@
             </Style>
 
 
-            <converters:IntToSolidBrushConverter x:Key="IntToSolidBrushConverter" />
-            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-            <converters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+            <commonConverters:IntToSolidBrushConverter x:Key="IntToSolidBrushConverter" />
+            <commonConverters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <commonConverters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
 
             <DataTemplate DataType="{x:Type businessLogic:MaterialColor}">
                 <StackPanel Orientation="Horizontal">

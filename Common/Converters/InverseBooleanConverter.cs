@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows;
-using System.Windows.Automation.Provider;
 using System.Windows.Data;
 
-namespace UiModule.Converters
+namespace Common.Converters
 {
-    public class CostImpactConverter : IValueConverter
+    [ValueConversion(typeof(bool?), typeof(bool))]
+    public class InverseBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || !(value is double costImpact))
+            if (targetType != typeof(bool?))
                 return DependencyProperty.UnsetValue;
-
-            return CostImpactToString(costImpact);
-        }
-
-        public static string CostImpactToString(double impactSum)
-        {
-            return impactSum.ToString("$0.00");
+            bool? b = (bool?)value;
+            return b.HasValue && !b.Value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return !(value as bool?);
         }
     }
 }

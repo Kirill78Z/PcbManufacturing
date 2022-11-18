@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using BusinessLogic;
-using UiModule.Properties;
+using Common.Properties;
 
 namespace UiModule.Converters
 {
