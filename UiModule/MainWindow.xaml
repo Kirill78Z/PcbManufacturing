@@ -16,7 +16,6 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <!--MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"-->
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <Expander Name="PreferencesExpander" Header="{x:Static properties:Resources.Preferences}" IsExpanded="True">
@@ -25,7 +24,8 @@
             </Expander>
             <Expander Name="QuoteExpander" Header="{x:Static properties:Resources.Quote}" IsEnabled="{Binding PreferencesViewModel.IsConfirmed}">
                 <local:QuoteView DataContext="{Binding QuoteViewModel}" 
-                                 MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"/>
+                                 MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                                 Height="250"/>
             </Expander>
             <Expander Header="{x:Static properties:Resources.Orders}">
                 <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>
