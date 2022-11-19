@@ -8,7 +8,6 @@
         xmlns:properties="clr-namespace:Common.Properties;assembly=Common"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="950"
-        MinWidth="950"
         d:DataContext="{d:DesignInstance {x:Type businessLogic:MainViewModel}}">
     <Window.Resources>
         <ResourceDictionary>

@@ -20,8 +20,7 @@
 
             <Style x:Key="PreferenceInput">
                 <Setter Property="Control.Margin" Value="3" />
-                <Setter Property="Control.HorizontalAlignment" Value="Left"/>
-                <Setter Property="Control.MinWidth" Value="300"/>
+                <Setter Property="Control.HorizontalAlignment" Value="Stretch"/>
             </Style>
 
 
@@ -62,8 +61,8 @@
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -101,8 +100,8 @@
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -145,8 +144,8 @@
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
