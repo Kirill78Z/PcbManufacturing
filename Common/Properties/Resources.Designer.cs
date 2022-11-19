@@ -268,6 +268,15 @@ namespace Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mm.
+        /// </summary>
+        public static string MilimetersShort {
+            get {
+                return ResourceManager.GetString("MilimetersShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {

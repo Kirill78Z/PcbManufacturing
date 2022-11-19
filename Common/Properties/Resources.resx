@@ -186,6 +186,9 @@
   <data name="Material" xml:space="preserve">
     <value>Material</value>
   </data>
+  <data name="MilimetersShort" xml:space="preserve">
+    <value>mm</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>

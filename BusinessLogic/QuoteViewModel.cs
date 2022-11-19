@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Common.Properties;
 
 namespace BusinessLogic
 {
@@ -36,7 +37,6 @@ namespace BusinessLogic
         private ImpactProportions _impactProportions;
 
         public ObservableCollection<QuoteElement> QuoteElements { get; } = new ObservableCollection<QuoteElement>();
-
 
         public double TimeImpactSummary
         {
@@ -105,59 +105,18 @@ namespace BusinessLogic
 
         }
 
-        private void UpdateImpactSummary()
-        {
-            _timeImpactSummary = 0;
-            _costImpactSummary = 0;
-            _fabricationTimeImpactSummary = 0;
-            _assemblyTimeImpactSummary = 0;
-            _componentsTimeImpactSummary = 0;
-            _fabricationCostImpactSummary = 0;
-            _assemblyCostImpactSummary = 0;
-            _componentsCostImpactSummary = 0;
-            foreach (var item in QuoteElements)
-            {
-                _timeImpactSummary += item.TimeImpact;
-                _costImpactSummary += item.CostImpact;
-                switch (item.QuoteElementType)
-                {
-                    case QuoteElementType.Fabrication:
-                        _fabricationTimeImpactSummary+= item.TimeImpact;
-                        _fabricationCostImpactSummary += item.CostImpact;
-                        break;
-                    case QuoteElementType.Assembly:
-                        _assemblyTimeImpactSummary += item.TimeImpact;
-                        _assemblyCostImpactSummary += item.CostImpact;
-                        break;
-                    case QuoteElementType.Components:
-                        _componentsTimeImpactSummary += item.TimeImpact;
-                        _componentsCostImpactSummary += item.CostImpact;
-                        break;
-                }
-            }
-            OnPropertyChanged(nameof(TimeImpactSummary));
-            OnPropertyChanged(nameof(CostImpactSummary));
-
-            OnPropertyChanged(nameof(FabricationTimeImpactSummary));
-            OnPropertyChanged(nameof(AssemblyTimeImpactSummary));
-            OnPropertyChanged(nameof(ComponentsTimeImpactSummary));
-            OnPropertyChanged(nameof(FabricationCostImpactSummary));
-            OnPropertyChanged(nameof(AssemblyCostImpactSummary));
-            OnPropertyChanged(nameof(ComponentsCostImpactSummary));
-
-            _impactProportions = new ImpactProportions(this);
-            OnPropertyChanged(nameof(ImpactProportions));
-        }
-
         public void UpdateQuote(IPreferencesViewModel preferences)
         {
-            //There we should implement some complex logic for analyzing Preferences somehow and costs calculation for displaying in Quote.
+            //There we should implement some complex logic for analyzing Preferences somehow, costs calculation and displaying in Quote.
             //But for this test WPF project it is not needed.
-            //So we just emulate some interaction between two program entities as a demonstration.
+            //So we just emulate some interaction between two program entities as a demonstration and hard-code most of the data.
 
             QuoteElements.Clear();
 
-            QuoteElements.Add(new QuoteElement("Base fabrication", "61.72x148.84mm, 10 layers", 4, 1710, QuoteElementType.Fabrication));
+            QuoteElements.Add(new QuoteElement("Board thickness", new ThicknessMm(preferences.BoardThickness), 2, 855, QuoteElementType.Fabrication));
+            QuoteElements.Add(new QuoteElement("Board dimensions", "61.72x148.84mm", 2, 427.5, QuoteElementType.Fabrication));
+            QuoteElements.Add(new QuoteElement("Layers", 20, 0, 427.5, QuoteElementType.Fabrication));
+            QuoteElements.Add(new QuoteElement("Material", preferences.Material, preferences.Material.TimeImpact, preferences.Material.CostImpact, QuoteElementType.Fabrication));
             QuoteElements.Add(new QuoteElement("Boards quantity", preferences.BoardsQuantity, 0, preferences.BoardsQuantity * 26.9, QuoteElementType.Fabrication));
             QuoteElements.Add(new QuoteElement("Surface finish", preferences.SurfaceFinish, preferences.SurfaceFinish.TimeImpact, preferences.SurfaceFinish.CostImpact, QuoteElementType.Fabrication));
 
@@ -175,8 +134,66 @@ namespace BusinessLogic
             QuoteElements.Add(new QuoteElement("Microchip ATTINY2313-18PC", "1", 0, 22.12, QuoteElementType.Components));
             QuoteElements.Add(new QuoteElement("Microchip ATTINY2313-18PC", "1", 0, 22.12, QuoteElementType.Components));
 
-            UpdateImpactSummary();
+            UpdateImpactSummaryAndRates();
         }
+
+        private void UpdateImpactSummaryAndRates()
+        {
+            _timeImpactSummary = 0;
+            _costImpactSummary = 0;
+            _fabricationTimeImpactSummary = 0;
+            _assemblyTimeImpactSummary = 0;
+            _componentsTimeImpactSummary = 0;
+            _fabricationCostImpactSummary = 0;
+            _assemblyCostImpactSummary = 0;
+            _componentsCostImpactSummary = 0;
+
+            var maxTimeInput = double.NegativeInfinity;
+            var maxCostInput = double.NegativeInfinity;
+            foreach (var item in QuoteElements)
+            {
+                _timeImpactSummary += item.TimeImpact;
+                _costImpactSummary += item.CostImpact;
+                switch (item.QuoteElementType)
+                {
+                    case QuoteElementType.Fabrication:
+                        _fabricationTimeImpactSummary += item.TimeImpact;
+                        _fabricationCostImpactSummary += item.CostImpact;
+                        break;
+                    case QuoteElementType.Assembly:
+                        _assemblyTimeImpactSummary += item.TimeImpact;
+                        _assemblyCostImpactSummary += item.CostImpact;
+                        break;
+                    case QuoteElementType.Components:
+                        _componentsTimeImpactSummary += item.TimeImpact;
+                        _componentsCostImpactSummary += item.CostImpact;
+                        break;
+                }
+
+                maxTimeInput = item.TimeImpact > maxTimeInput ? item.TimeImpact : maxTimeInput;
+                maxCostInput = item.CostImpact > maxCostInput ? item.CostImpact : maxCostInput;
+            }
+            OnPropertyChanged(nameof(TimeImpactSummary));
+            OnPropertyChanged(nameof(CostImpactSummary));
+
+            OnPropertyChanged(nameof(FabricationTimeImpactSummary));
+            OnPropertyChanged(nameof(AssemblyTimeImpactSummary));
+            OnPropertyChanged(nameof(ComponentsTimeImpactSummary));
+            OnPropertyChanged(nameof(FabricationCostImpactSummary));
+            OnPropertyChanged(nameof(AssemblyCostImpactSummary));
+            OnPropertyChanged(nameof(ComponentsCostImpactSummary));
+
+            _impactProportions = new ImpactProportions(this);
+            OnPropertyChanged(nameof(ImpactProportions));
+
+            //calculate impact rates as ratio of impact to max impact
+            foreach (var item in QuoteElements)
+            {
+                item.TimeImpactRate = item.TimeImpact / maxTimeInput;
+                item.CostImpactRate = item.CostImpact / maxCostInput;
+            }
+        }
+
     }
 
     public class QuoteElement : IImpact
@@ -185,6 +202,9 @@ namespace BusinessLogic
         public object Value { get; }
         public double TimeImpact { get; }
         public double CostImpact { get; }
+
+        public double TimeImpactRate { get; set; }
+        public double CostImpactRate { get; set; }
 
         public QuoteElementType QuoteElementType { get; }
 
@@ -244,4 +264,18 @@ namespace BusinessLogic
         }
     }
 
+    public class ThicknessMm
+    {
+        public double Thickness { get; }
+
+        public ThicknessMm(double thickness)
+        {
+            Thickness = thickness;
+        }
+
+        public override string ToString()
+        {
+            return Thickness.ToString($"0.00 {Resources.MilimetersShort}");
+        }
+    }
 }

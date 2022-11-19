@@ -54,13 +54,11 @@
                     <DataGridTextColumn x:Name="ParameterColumn" 
                                     Header="{x:Static properties:Resources.Parameter}"
                                     Binding="{Binding Parameter}" 
-                                    Width="Auto"
-                                    MaxWidth="150"/>
+                                    Width="200"/>
                     <DataGridTextColumn x:Name="ValueColumn" 
                                     Header="{x:Static properties:Resources.Value}"
                                     Binding="{Binding Value}" 
-                                    Width="Auto"
-                                    MaxWidth="200"/>
+                                    Width="150"/>
                     <DataGridTextColumn x:Name="TimeImpactColumn"
                                     Header="{x:Static properties:Resources.TimeImpact}"
                                     Binding="{Binding TimeImpact, Converter={StaticResource TimeImpactConverter}}" 
@@ -154,31 +152,84 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Static properties:Resources.Manufacturing}" FontWeight="Bold" FontSize="18"/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="2">
-                    <RadioButton GroupName="ManufacturingDiagramMode" IsChecked="True" Width="30">
-                        <Image Source="Images/icons8-clock-24.png" SnapsToDevicePixels="True" Height="24" Width="24"/>
-                    </RadioButton>
-                    <RadioButton Name="IsShowCostToggle" GroupName="ManufacturingDiagramMode" IsChecked="False" Width="30">
-                        <Image Source="Images/icons8-us-dollar-24.png" SnapsToDevicePixels="True"  Height="24" Width="24"/>
-                    </RadioButton>
-                </StackPanel>
-            </Grid>
-            <customControls:ManufacturingDiagram ImpactProportions="{Binding ImpactProportions}" 
+        <ScrollViewer Grid.Column="1" Margin="3" Height="250">
+            <StackPanel  Orientation="Vertical" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{x:Static properties:Resources.Manufacturing}" FontWeight="Bold" FontSize="18"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="2">
+                        <RadioButton GroupName="ManufacturingDiagramMode" IsChecked="True" Width="30">
+                            <Image Source="Images/icons8-clock-24.png" SnapsToDevicePixels="True" Height="24" Width="24"/>
+                        </RadioButton>
+                        <RadioButton Name="IsShowCostToggle" GroupName="ManufacturingDiagramMode" IsChecked="False" Width="30">
+                            <Image Source="Images/icons8-us-dollar-24.png" SnapsToDevicePixels="True"  Height="24" Width="24"/>
+                        </RadioButton>
+                    </StackPanel>
+                </Grid>
+                <customControls:ManufacturingDiagram ImpactProportions="{Binding ImpactProportions}" 
                                                  IsShowCost="{Binding IsChecked, ElementName=IsShowCostToggle}"/>
-            <Separator/>
+                <Separator/>
 
+                <ListBox BorderThickness="0"
+                     ItemsSource="{Binding Source={StaticResource GroupedQuoteElements}}">
+                    <ListBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="75"/>
+                                            <ColumnDefinition Width="75"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock >
+                                            <Run FontSize="18" Text="{Binding Name, Mode=OneWay, Converter={StaticResource GroupNameConverter}}"/>
+                                            <LineBreak/>
+                                            <Run>
+                                                <Run.Text>
+                                                    <Binding Converter="{StaticResource GroupImpactSummaryConverter2}"
+                                                             Mode="OneWay">
+                                                        <Binding.ConverterParameter>
+                                                            <system:Boolean>true</system:Boolean>
+                                                        </Binding.ConverterParameter>
+                                                    </Binding>
+                                                </Run.Text>
+                                            </Run>;
+                                            <Run Text="{Binding Converter={StaticResource GroupImpactSummaryConverter2}, Mode=OneWay}"/>
+                                        </TextBlock>
 
-        </StackPanel>
+                                        <TextBlock Grid.Column="1" Text="{x:Static properties:Resources.TimeImpact}" VerticalAlignment="Bottom"/>
+                                        <TextBlock Grid.Column="2" Text="{x:Static properties:Resources.CostImpact}" VerticalAlignment="Bottom"/>
 
+                                    </Grid>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ListBox.GroupStyle>
 
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type businessLogic:QuoteElement}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="75"/>
+                                    <ColumnDefinition Width="75"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Parameter}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Value}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding TimeImpactRate}"/>
+                                <TextBlock Grid.Column="3" Text="{Binding CostImpactRate}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+            </StackPanel>
 
+        </ScrollViewer>
 
     </Grid>
 </UserControl>

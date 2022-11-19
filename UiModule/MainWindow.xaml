@@ -17,6 +17,7 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+    <!--MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"-->
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <Expander Name="PreferencesExpander" Header="{x:Static properties:Resources.Preferences}" IsExpanded="True">
