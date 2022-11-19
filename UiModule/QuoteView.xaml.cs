@@ -24,7 +24,7 @@ namespace UiModule
             InitializeComponent();
         }
 
-        private void UIElement_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void ScrollViewer_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ScrollViewer scv = (ScrollViewer)sender;
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);

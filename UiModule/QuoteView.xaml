@@ -156,7 +156,7 @@
 
 
         <ScrollViewer Grid.Column="1" Grid.RowSpan="2" Margin="3"
-                      PreviewMouseWheel="UIElement_OnPreviewMouseWheel">
+                      PreviewMouseWheel="ScrollViewer_OnPreviewMouseWheel">
             <StackPanel  Orientation="Vertical" >
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -202,14 +202,28 @@
                                             Header="{x:Static properties:Resources.Value}"
                                             Binding="{Binding Value}" 
                                             Width="Auto"/>
-                        <DataGridTextColumn x:Name="TimeImpactColumn2"
-                                            Header="{x:Static properties:Resources.TimeImpact}"
-                                            Binding="{Binding TimeImpactRate}" 
-                                            Width="75"/>
-                        <DataGridTextColumn x:Name="CostImpactColumn2" 
-                                            Header="{x:Static properties:Resources.CostImpact}"
-                                            Binding="{Binding CostImpactRate}" 
-                                            Width="75"/>
+                        <DataGridTemplateColumn x:Name="TimeImpactColumn2"
+                                                Header="{x:Static properties:Resources.TimeImpact}"
+                                                Width="75">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="{x:Type businessLogic:QuoteElement}">
+                                    <customControls:ImpactRateDiagram Margin="0,0,6,0"
+                                                                      Value="{Binding TimeImpactRate}"
+                                                                      FilledBrush="DodgerBlue"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="CostImpactColumn2" 
+                                                Header="{x:Static properties:Resources.CostImpact}"
+                                                Width="75">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="{x:Type businessLogic:QuoteElement}">
+                                    <customControls:ImpactRateDiagram Margin="0,0,6,0"
+                                                                      Value="{Binding CostImpactRate}"
+                                                                      FilledBrush="Orange"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
 
                     <DataGrid.GroupStyle>

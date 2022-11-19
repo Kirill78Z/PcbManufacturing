@@ -62,7 +62,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceAddition"/>
+                    <ColumnDefinition Width="100" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -101,7 +101,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceAddition"/>
+                    <ColumnDefinition Width="100" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -145,7 +145,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceAddition"/>
+                    <ColumnDefinition Width="100" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>

@@ -5,5 +5,11 @@
     <Page Update="Themes\Generic.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\ImpactRateDiagram.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ManufacturingDiagram.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>
