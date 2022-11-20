@@ -250,9 +250,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="{x:Static properties:Resources.DiscardToDefault}" Margin="3" Command="{Binding DiscardToDefaultCommand}"/>
+            <Button Content="{x:Static properties:Resources.DiscardToDefault}" Margin="5" Command="{Binding DiscardToDefaultCommand}"/>
             <Button x:Name="ConfirmBtn" Grid.Column="2" Content="{x:Static properties:Resources.SaveAndContinue}"
-                    Margin="3" Command="{Binding SaveAndContinueCommand}"/>
+                    Margin="5" Command="{Binding SaveAndContinueCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

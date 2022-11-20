@@ -53,7 +53,8 @@
                       CanUserSortColumns="False"
                       CanUserReorderColumns="False"
                       HeadersVisibility="Column"
-                      HorizontalScrollBarVisibility="Disabled">
+                      HorizontalScrollBarVisibility="Disabled"
+                      RowBackground="GhostWhite">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ParameterColumn" 
                                     Header="{x:Static properties:Resources.Parameter}"

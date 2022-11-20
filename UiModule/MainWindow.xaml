@@ -31,17 +31,33 @@
     <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" 
                   IsEnabled="{Binding StatusHeaderViewModel.Status, Converter={StaticResource StatusIsAvailableConverter}}">
         <StackPanel Orientation="Vertical">
-            <Expander Name="PreferencesExpander" Header="{x:Static properties:Resources.Preferences}" IsExpanded="True">
-                <local:PreferencesView DataContext="{Binding PreferencesViewModel}"
-                                       MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"/>
+            <Expander Name="PreferencesExpander" Header="{x:Static properties:Resources.Preferences}" IsExpanded="True"
+                      Margin="5">
+                <Border Background="GhostWhite">
+                    <local:PreferencesView DataContext="{Binding PreferencesViewModel}"
+                                           MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"/>
+                </Border>
             </Expander>
-            <Expander Name="QuoteExpander" Header="{x:Static properties:Resources.Quote}" IsEnabled="{Binding PreferencesViewModel.IsConfirmed}">
-                <local:QuoteView DataContext="{Binding QuoteViewModel}" 
-                                 MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
-                                 Height="250"/>
+
+            <Separator SnapsToDevicePixels="True"/>
+
+            <Expander Name="QuoteExpander" Header="{x:Static properties:Resources.Quote}" IsEnabled="{Binding PreferencesViewModel.IsConfirmed}"
+                      Margin="5">
+                <Border Background="GhostWhite">
+                    <local:QuoteView DataContext="{Binding QuoteViewModel}" 
+                                     MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                                     Height="250"/>
+                </Border>
             </Expander>
-            <Expander Header="{x:Static properties:Resources.Orders}">
-                <Border Height="500"  BorderThickness="2" BorderBrush="Blue"></Border>
+
+            <Separator SnapsToDevicePixels="True"/>
+
+            <Expander Header="{x:Static properties:Resources.Orders}"
+                      Margin="5">
+                <Border Background="GhostWhite">
+                    <local:OrdersView MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                                  Height="250"/>
+                </Border>
             </Expander>
         </StackPanel>
     </ScrollViewer>

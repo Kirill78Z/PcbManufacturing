@@ -259,6 +259,15 @@ namespace Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make a Current Order.
+        /// </summary>
+        public static string MakeACurrentOrder {
+            get {
+                return ResourceManager.GetString("MakeACurrentOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manufacturing.
         /// </summary>
         public static string Manufacturing {
@@ -309,6 +318,16 @@ namespace Common.Properties {
         public static string None {
             get {
                 return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no ordrers yet.
+        ///Your ordres will appear here..
+        /// </summary>
+        public static string NoOrdersHint {
+            get {
+                return ResourceManager.GetString("NoOrdersHint", resourceCulture);
             }
         }
         

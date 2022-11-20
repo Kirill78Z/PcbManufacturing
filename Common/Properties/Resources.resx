@@ -183,6 +183,9 @@
   <data name="LeadFree" xml:space="preserve">
     <value>Lead Free</value>
   </data>
+  <data name="MakeACurrentOrder" xml:space="preserve">
+    <value>Make a Current Order</value>
+  </data>
   <data name="Manufacturing" xml:space="preserve">
     <value>Manufacturing</value>
   </data>
@@ -200,6 +203,10 @@
   </data>
   <data name="None" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="NoOrdersHint" xml:space="preserve">
+    <value>There are no ordrers yet.
+Your ordres will appear here.</value>
   </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>

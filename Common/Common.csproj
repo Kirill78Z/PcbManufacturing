@@ -9,6 +9,7 @@
     <None Remove="Images\icons8-clock-24.png" />
     <None Remove="Images\icons8-decepticon-96.png" />
     <None Remove="Images\icons8-done-30.png" />
+    <None Remove="Images\icons8-post-box-80.png" />
     <None Remove="Images\icons8-refresh-30.png" />
     <None Remove="Images\icons8-shopping-cart-24.png" />
     <None Remove="Images\icons8-us-dollar-24.png" />
@@ -18,6 +19,7 @@
     <Resource Include="Images\icons8-clock-24.png" />
     <Resource Include="Images\icons8-decepticon-96.png" />
     <Resource Include="Images\icons8-done-30.png" />
+    <Resource Include="Images\icons8-post-box-80.png" />
     <Resource Include="Images\icons8-refresh-30.png" />
     <Resource Include="Images\icons8-shopping-cart-24.png" />
     <Resource Include="Images\icons8-us-dollar-24.png" />
