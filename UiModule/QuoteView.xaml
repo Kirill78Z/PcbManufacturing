@@ -176,7 +176,7 @@
                 </Grid>
                 <customControls:ManufacturingDiagram ImpactProportions="{Binding ImpactProportions}" 
                                                  IsShowCost="{Binding IsChecked, ElementName=IsShowCostToggle}"/>
-                <Separator SnapsToDevicePixels="True"/>
+                <Separator UseLayoutRounding="True"/>
 
                 <DataGrid ItemsSource="{Binding Source={StaticResource GroupedQuoteElements}}"
                           IsReadOnly="True" 

@@ -39,7 +39,7 @@
                 </Border>
             </Expander>
 
-            <Separator SnapsToDevicePixels="True"/>
+            <Separator UseLayoutRounding="True"/>
 
             <Expander Name="QuoteExpander" Header="{x:Static properties:Resources.Quote}" IsEnabled="{Binding PreferencesViewModel.IsConfirmed}"
                       Margin="5">
@@ -50,7 +50,7 @@
                 </Border>
             </Expander>
 
-            <Separator SnapsToDevicePixels="True"/>
+            <Separator UseLayoutRounding="True"/>
 
             <Expander Header="{x:Static properties:Resources.Orders}"
                       Margin="5">

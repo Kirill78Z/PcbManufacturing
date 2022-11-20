@@ -103,7 +103,7 @@
 
         </Grid>
 
-        <Separator Grid.Row="1" SnapsToDevicePixels="True"/>
+        <Separator Grid.Row="1" UseLayoutRounding="True"/>
 
         <Grid Grid.Row="2" Margin="5">
             <Grid.ColumnDefinitions>
@@ -150,7 +150,7 @@
             </Grid>
         </Grid>
 
-        <Separator Grid.Row="3" SnapsToDevicePixels="True"/>
+        <Separator Grid.Row="3" UseLayoutRounding="True"/>
 
         <Grid Grid.Row="4" Margin="5">
             <Grid.ColumnDefinitions>
