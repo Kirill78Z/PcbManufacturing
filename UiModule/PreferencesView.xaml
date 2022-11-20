@@ -23,10 +23,24 @@
                 <Setter Property="Control.HorizontalAlignment" Value="Stretch"/>
             </Style>
 
+            <Style x:Key="PreferenceTextBoxWithValidation" TargetType="{x:Type TextBox}" BasedOn="{StaticResource PreferenceInput}">
+                <EventSetter Event="LostKeyboardFocus" Handler="TextBox_OnLostKeyBoardFocus"/>
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}"/>
+                    </Trigger>
+                    <Trigger Property="Validation.HasError" Value="False">
+                        <Setter Property="ToolTip"
+                                Value="{x:Null}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
             <commonConverters:IntToSolidBrushConverter x:Key="IntToSolidBrushConverter" />
             <commonConverters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <commonConverters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+            <commonConverters:ThicknessConverter x:Key="ThicknessConverter"/>
 
             <DataTemplate DataType="{x:Type businessLogic:MaterialColor}">
                 <StackPanel Orientation="Horizontal">
@@ -75,10 +89,16 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ProjectName}"  Style="{StaticResource PreferenceInput}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.ZipCode}" Style="{StaticResource PreferenceName}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ZipCode}" Style="{StaticResource PreferenceInput}" MinWidth="150" MaxLength="6"/>
+                <TextBox Name="ZipCodeTextBox" Grid.Row="1" Grid.Column="1" 
+                         Text="{Binding ZipCode, UpdateSourceTrigger=Explicit, NotifyOnTargetUpdated=True}"
+                         Style="{StaticResource PreferenceTextBoxWithValidation}" MinWidth="150" MaxLength="6" 
+                         TargetUpdated="TextBox_OnTargetUpdated"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.BoardsQuantity}" Style="{StaticResource PreferenceName}"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding BoardsQuantity}" Style="{StaticResource PreferenceInput}" MinWidth="150"/>
+                <TextBox Name="BoardsQuantityTextBox" Grid.Row="2" Grid.Column="1" 
+                         Text="{Binding BoardsQuantity, UpdateSourceTrigger=Explicit, NotifyOnTargetUpdated=True}" 
+                         Style="{StaticResource PreferenceTextBoxWithValidation}" MinWidth="150"
+                         TargetUpdated="TextBox_OnTargetUpdated"/>
             </Grid>
 
         </Grid>
@@ -112,7 +132,10 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.BoardThickness}" Style="{StaticResource PreferenceName}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BoardThickness}" Style="{StaticResource PreferenceInput}" MinWidth="150"/>
+                <TextBox Name="BoardThicknessTextBox" Grid.Row="0" Grid.Column="1" 
+                         Text="{Binding BoardThickness, Converter={StaticResource ThicknessConverter}, UpdateSourceTrigger=Explicit, NotifyOnTargetUpdated=True}" 
+                         Style="{StaticResource PreferenceTextBoxWithValidation}" MinWidth="150" 
+                         TargetUpdated="TextBox_OnTargetUpdated"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.Material}" Style="{StaticResource PreferenceName}"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Name="MaterialComboBox" Style="{StaticResource PreferenceInput}" ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}"/>
@@ -228,7 +251,8 @@
             </Grid.ColumnDefinitions>
 
             <Button Content="{x:Static properties:Resources.DiscardToDefault}" Margin="3" Command="{Binding DiscardToDefaultCommand}"/>
-            <Button Grid.Column="2" Content="{x:Static properties:Resources.SaveAndContinue}"  Margin="3" Command="{Binding SaveAndContinueCommand}"/>
+            <Button x:Name="ConfirmBtn" Grid.Column="2" Content="{x:Static properties:Resources.SaveAndContinue}"
+                    Margin="3" Command="{Binding SaveAndContinueCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

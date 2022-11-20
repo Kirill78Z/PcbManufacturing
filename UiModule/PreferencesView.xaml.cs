@@ -23,5 +23,26 @@ namespace UiModule
         {
             InitializeComponent();
         }
+
+        private void TextBox_OnLostKeyBoardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            UpdateConfirmBtn(sender);
+        }
+
+        private void TextBox_OnTargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            UpdateConfirmBtn(sender);
+        }
+
+        private void UpdateConfirmBtn(object sender)
+        {
+            ((Control)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+            var err = Validation.GetHasError(ZipCodeTextBox)
+                      || Validation.GetHasError(BoardsQuantityTextBox)
+                      || Validation.GetHasError(BoardThicknessTextBox);
+
+            ConfirmBtn.IsEnabled = !err;
+        }
     }
 }
