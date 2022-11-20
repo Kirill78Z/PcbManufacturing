@@ -162,6 +162,9 @@
   <data name="DiscardToDefault" xml:space="preserve">
     <value>Discard to default</value>
   </data>
+  <data name="EverithingIsUpToDate" xml:space="preserve">
+    <value>Everithing is up to date</value>
+  </data>
   <data name="Fabrication" xml:space="preserve">
     <value>Fabrication</value>
   </data>
@@ -207,6 +210,9 @@
   <data name="Parameter" xml:space="preserve">
     <value>Parameter</value>
   </data>
+  <data name="PlaceAnOrder" xml:space="preserve">
+    <value>Place an order</value>
+  </data>
   <data name="Preferences" xml:space="preserve">
     <value>Preferences</value>
   </data>
@@ -249,6 +255,12 @@
   <data name="SurfaceFinish" xml:space="preserve">
     <value>Surface Finish</value>
   </data>
+  <data name="TempoAutomation" xml:space="preserve">
+    <value>Tempo Autmation</value>
+  </data>
+  <data name="TempoAutomationDescription" xml:space="preserve">
+    <value>Describe your design and resieve real-time design feedback for manufacturing and component sourcing. If you update your design we will provide an updated quote.</value>
+  </data>
   <data name="TentingForVias" xml:space="preserve">
     <value>Tenting for Vias</value>
   </data>
@@ -257,6 +269,9 @@
   </data>
   <data name="TopSide" xml:space="preserve">
     <value>Top Side</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating...</value>
   </data>
   <data name="Value" xml:space="preserve">
     <value>Value</value>

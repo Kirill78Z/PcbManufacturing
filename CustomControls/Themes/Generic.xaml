@@ -4,5 +4,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/CustomControls;component/Themes/ManufacturingDiagram.xaml" />
         <ResourceDictionary Source="/CustomControls;component/Themes/ImpactRateDiagram.xaml" />
+        <ResourceDictionary Source="/CustomControls;component/Themes/CustomMainWindow.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

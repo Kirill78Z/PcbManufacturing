@@ -15,10 +15,13 @@ namespace BusinessLogic
 
         public IQuoteViewModel QuoteViewModel { get; }
 
+        public IStatusHeaderViewModel StatusHeaderViewModel { get; }
+
         private MainViewModel()
         {
             QuoteViewModel = new QuoteViewModel();
             PreferencesViewModel = new PreferencesViewModel(QuoteViewModel);
+            StatusHeaderViewModel = new StatusHeaderViewModel();
         }
     }
 }

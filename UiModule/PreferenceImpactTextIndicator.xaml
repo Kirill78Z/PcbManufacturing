@@ -20,7 +20,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
-        <TextBlock Text="{Binding CostImpact, Converter={StaticResource CostImpactConverter}}"/>
-        <TextBlock Text="{Binding TimeImpact, Converter={StaticResource TimeImpactConverter}}"/>
+        <TextBlock Text="{Binding CostImpact, Converter={StaticResource CostImpactConverter}}" Foreground="Orange"/>
+        <TextBlock Text="{Binding TimeImpact, Converter={StaticResource TimeImpactConverter}}" Foreground="DodgerBlue"/>
     </StackPanel>
 </UserControl>

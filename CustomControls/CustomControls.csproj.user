@@ -8,6 +8,9 @@
     <Page Update="Themes\ImpactRateDiagram.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\CustomMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\ManufacturingDiagram.xaml">
       <SubType>Designer</SubType>
     </Page>

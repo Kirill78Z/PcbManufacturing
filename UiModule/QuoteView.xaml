@@ -166,16 +166,16 @@
                     <TextBlock Text="{x:Static properties:Resources.Manufacturing}" FontWeight="Bold" FontSize="18"/>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="2">
                         <RadioButton GroupName="ManufacturingDiagramMode" IsChecked="True" Width="30">
-                            <Image Source="Images/icons8-clock-24.png" SnapsToDevicePixels="True" Height="24" Width="24"/>
+                            <Image Source="/Common;component/Images/icons8-clock-24.png" SnapsToDevicePixels="True" Height="24" Width="24"/>
                         </RadioButton>
                         <RadioButton Name="IsShowCostToggle" GroupName="ManufacturingDiagramMode" IsChecked="False" Width="30">
-                            <Image Source="Images/icons8-us-dollar-24.png" SnapsToDevicePixels="True"  Height="24" Width="24"/>
+                            <Image Source="/Common;component/Images/icons8-us-dollar-24.png" SnapsToDevicePixels="True"  Height="24" Width="24"/>
                         </RadioButton>
                     </StackPanel>
                 </Grid>
                 <customControls:ManufacturingDiagram ImpactProportions="{Binding ImpactProportions}" 
                                                  IsShowCost="{Binding IsChecked, ElementName=IsShowCostToggle}"/>
-                <Separator/>
+                <Separator SnapsToDevicePixels="True"/>
 
                 <DataGrid ItemsSource="{Binding Source={StaticResource GroupedQuoteElements}}"
                           IsReadOnly="True" 

@@ -196,6 +196,15 @@ namespace Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Everithing is up to date.
+        /// </summary>
+        public static string EverithingIsUpToDate {
+            get {
+                return ResourceManager.GetString("EverithingIsUpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fabrication.
         /// </summary>
         public static string Fabrication {
@@ -331,6 +340,15 @@ namespace Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Place an order.
+        /// </summary>
+        public static string PlaceAnOrder {
+            get {
+                return ResourceManager.GetString("PlaceAnOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preferences.
         /// </summary>
         public static string Preferences {
@@ -457,6 +475,24 @@ namespace Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tempo Autmation.
+        /// </summary>
+        public static string TempoAutomation {
+            get {
+                return ResourceManager.GetString("TempoAutomation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Describe your design and resieve real-time design feedback for manufacturing and component sourcing. If you update your design we will provide an updated quote..
+        /// </summary>
+        public static string TempoAutomationDescription {
+            get {
+                return ResourceManager.GetString("TempoAutomationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tenting for Vias.
         /// </summary>
         public static string TentingForVias {
@@ -480,6 +516,15 @@ namespace Common.Properties {
         public static string TopSide {
             get {
                 return ResourceManager.GetString("TopSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        public static string Updating {
+            get {
+                return ResourceManager.GetString("Updating", resourceCulture);
             }
         }
         

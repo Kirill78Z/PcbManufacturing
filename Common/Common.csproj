@@ -6,6 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\icons8-clock-24.png" />
+    <None Remove="Images\icons8-decepticon-96.png" />
+    <None Remove="Images\icons8-done-30.png" />
+    <None Remove="Images\icons8-refresh-30.png" />
+    <None Remove="Images\icons8-shopping-cart-24.png" />
+    <None Remove="Images\icons8-us-dollar-24.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\icons8-clock-24.png" />
+    <Resource Include="Images\icons8-decepticon-96.png" />
+    <Resource Include="Images\icons8-done-30.png" />
+    <Resource Include="Images\icons8-refresh-30.png" />
+    <Resource Include="Images\icons8-shopping-cart-24.png" />
+    <Resource Include="Images\icons8-us-dollar-24.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
