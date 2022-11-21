@@ -75,7 +75,7 @@
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MaxWidth="400"/>
                     <ColumnDefinition Width="100" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
@@ -120,7 +120,7 @@
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MaxWidth="400"/>
                     <ColumnDefinition Width="100" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
@@ -167,7 +167,7 @@
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PreferenceName" />
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" MaxWidth="400"/>
                     <ColumnDefinition Width="100" SharedSizeGroup="PreferenceAddition"/>
                 </Grid.ColumnDefinitions>
 
