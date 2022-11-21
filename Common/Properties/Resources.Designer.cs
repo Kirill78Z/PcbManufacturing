@@ -494,7 +494,7 @@ namespace Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tempo Autmation.
+        ///   Looks up a localized string similar to Tempo Automation.
         /// </summary>
         public static string TempoAutomation {
             get {
